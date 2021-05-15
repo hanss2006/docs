@@ -46,7 +46,7 @@ public class JwtAuthenticationRestController {
 
     final String token = jwtTokenUtil.generateToken(userDetails);
 
-    return ResponseEntity.ok(new JwtTokenResponse(token));
+    return ResponseEntity.ok(new JwtTokenResponse(token, userDetails.getAuthorities()));
   }
 
   @RequestMapping(value = "${jwt.refresh.token.uri}", method = RequestMethod.GET)
@@ -58,7 +58,7 @@ public class JwtAuthenticationRestController {
 
     if (jwtTokenUtil.canTokenBeRefreshed(token)) {
       String refreshedToken = jwtTokenUtil.refreshToken(token);
-      return ResponseEntity.ok(new JwtTokenResponse(refreshedToken));
+      return ResponseEntity.ok(new JwtTokenResponse(refreshedToken, user.getAuthorities()));
     } else {
       return ResponseEntity.badRequest().body(null);
     }
