@@ -22,7 +22,7 @@ import java.util.List;
 public class UserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userRepository;
 
     @Autowired
     private IUserService service;

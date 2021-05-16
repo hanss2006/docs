@@ -1,6 +1,7 @@
 package com.ettiv.docs.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class UserService implements IUserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -24,6 +25,7 @@ public class UserService implements IUserService {
     // API
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public User registerNewUserAccount(final User accountDto) {
         if (emailExists(accountDto.getEmail())) {
             throw new UserAlreadyExistException("There is an account with that email address: " + accountDto.getEmail());
@@ -39,11 +41,13 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void saveRegisteredUser(final User user) {
         userRepository.save(user);
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteUser(final User user) {
         userRepository.delete(user);
     }
@@ -59,6 +63,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void changeUserPassword(final User user, final String password) {
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);

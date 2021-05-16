@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -18,7 +19,7 @@ public class SetupDataLoader implements
     boolean alreadySetup = false;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpaRepository userRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -48,12 +49,18 @@ public class SetupDataLoader implements
         String email = "hanss@list.ru";
         if (userRepository.findByEmail(email)==null){
             Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+            Role userRole = roleRepository.findByName("ROLE_USER");
+            ArrayList<Role> roles = new ArrayList<Role>();
+            // добавим в список ряд элементов
+            roles.add(adminRole);
+            roles.add(userRole);
+
             User user = new User();
             user.setFirstName("Пав");
             user.setLastName("Гру");
             user.setPassword(passwordEncoder.encode("privet"));
             user.setEmail(email);
-            user.setRoles(Arrays.asList(adminRole));
+            user.setRoles(roles);
             user.setEnabled(true);
             userRepository.save(user);
         }
@@ -70,6 +77,20 @@ public class SetupDataLoader implements
             user.setEnabled(true);
             userRepository.save(user);
         }
+
+        email = "user@gmail.com";
+        if (userRepository.findByEmail(email)==null){
+            Role userRole = roleRepository.findByName("ROLE_USER");
+            User user = new User();
+            user.setFirstName("User");
+            user.setLastName("User");
+            user.setPassword(passwordEncoder.encode("123"));
+            user.setEmail(email);
+            user.setRoles(Arrays.asList(userRole));
+            user.setEnabled(true);
+            userRepository.save(user);
+        }
+
         alreadySetup = true;
     }
 
