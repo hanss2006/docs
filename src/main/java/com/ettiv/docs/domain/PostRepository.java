@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface PostRepository extends PagingAndSortingRepository<Post, Integer> {
+public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 
     List<Post> findByName(@Param("name") String name);
 

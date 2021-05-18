@@ -9,7 +9,7 @@ import java.util.Date;
 public class Doc {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String regNum;
     private String name;
@@ -19,22 +19,22 @@ public class Doc {
     @Lob
     private String note;
 
-    private Integer vidId;
+    private Long vidId;
     @ManyToOne
     @JoinColumn(name = "vidId", insertable = false, updatable = false)
     private VidDoc vidDoc;
 
-    private Integer typeDocId;
+    private Long typeDocId;
     @ManyToOne
     @JoinColumn(name = "typeDocId", insertable = false, updatable = false)
     private TypeDoc typeDoc;
 
-    private Integer orgId;
+    private Long orgId;
     @ManyToOne
     @JoinColumn(name = "orgId", insertable = false, updatable = false)
     private Org org;
 
-    private Integer employeeId;
+    private Long employeeId;
     @ManyToOne
     @JoinColumn(name = "employeeId", insertable = false, updatable = false)
     private Employee employee;

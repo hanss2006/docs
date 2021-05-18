@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "types", path = "types")
-public interface TypeDocRepository extends PagingAndSortingRepository<TypeDoc, Integer> {
+public interface TypeDocRepository extends PagingAndSortingRepository<TypeDoc, Long> {
 
     List<TypeDoc> findByName(@Param("name") String name);
 

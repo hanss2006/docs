@@ -8,18 +8,18 @@ import javax.persistence.*;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String fio;
     private String address;
     private String phone;
 
-    private Integer postId;
+    private Long postId;
     @ManyToOne
     @JoinColumn(name = "postId", insertable = false, updatable = false)
     private Post post;
 
-    private Integer unitId;
+    private Long unitId;
     @ManyToOne
     @JoinColumn(name = "unitId", insertable = false, updatable = false)
     private Unit unit;

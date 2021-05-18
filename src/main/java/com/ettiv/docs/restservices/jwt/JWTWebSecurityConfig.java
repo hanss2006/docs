@@ -61,7 +61,7 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(jwtUnAuthorizedResponseAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(authenticationPath, refreshPath).permitAll()
+                .antMatchers(authenticationPath).permitAll()
                 .antMatchers("/api/**").authenticated();
 
         httpSecurity
