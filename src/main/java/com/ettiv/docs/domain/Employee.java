@@ -1,6 +1,6 @@
 package com.ettiv.docs.domain;
 import lombok.Data;
-
+import org.hibernate.annotations.Type;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +15,11 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Type(type="encryptedString")
     private String fio;
+    @Type(type="encryptedString")
     private String address;
+    @Type(type="encryptedString")
     private String phone;
 
     private Long postId;
