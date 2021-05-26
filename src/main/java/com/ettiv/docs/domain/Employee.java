@@ -14,8 +14,6 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @Type(type="encryptedString")
     private String fio;
     @Type(type="encryptedString")
     private String address;
